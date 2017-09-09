@@ -34,7 +34,7 @@ all: $(TARGET)
 $(TARGET):lgzip.c $(ZLIBPATH)/libz.a
 	$(CC) $(CCFLAG) -o $@ $^ $(SHARED)
 
-$(ZLIBPATH)/libzlib.a:$(ZLIBPATH)/Makefile
+$(ZLIBPATH)/libz.a:$(ZLIBPATH)/Makefile
 	make -C $(ZLIBPATH)
 
 $(ZLIBPATH)/Makefile:$(ZLIBPATH)/configure
