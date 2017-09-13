@@ -89,6 +89,7 @@ ldeflategz(lua_State *L)
 			output = expandbuffer(L, outsz);
 			c_stream.avail_out = outsz;
 			c_stream.next_out = output + outsz;
+			outsz *= 2;
 		} else {
 			break;
 		}
@@ -101,6 +102,7 @@ ldeflategz(lua_State *L)
 			output = expandbuffer(L, outsz);
 			c_stream.avail_out = outsz;
 			c_stream.next_out = output + outsz;
+			outsz *= 2;
 		} else {
 			return luaL_error(L,
 				"gzip deflate finish error:%d", err);
@@ -149,7 +151,8 @@ linflategz(lua_State *L)
 		if (d_stream.avail_out == 0) {
 			output = expandbuffer(L, outputsz);
 			d_stream.avail_out = outputsz;
-			d_stream.next_out = output;
+			d_stream.next_out = output + outputsz;
+			outputsz *= 2;
 		}
 	}
 	ret = inflateEnd(&d_stream);
